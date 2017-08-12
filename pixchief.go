@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/francisl/pixchief/internal/pixpath"
+	"github.com/francisl/pixchief/internal/file"
 )
 
 func usage() {
@@ -16,8 +16,10 @@ func main() {
 		usage()
 		return
 	}
-	err := pixpath.PathManagement(os.Args[1], os.Args[2])
+	src, dest := os.Args[1], os.Args[2]
+	err := file.ArePathsValid(src, dest)
 	if err != nil {
 		usage()
 	}
+	file.MoveFiles(src, dest)
 }
